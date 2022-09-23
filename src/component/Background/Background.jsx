@@ -1,8 +1,7 @@
 import styles from "./Background.module.css";
 import clsx from "clsx";
 
-import { useSelector, useDispatch } from "react-redux";
-import { setTheme } from "../../pages/home/HomeSlice";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 

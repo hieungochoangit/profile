@@ -7,7 +7,7 @@ const initialState = {
 };
 
 export const homeSlice = createSlice({
-    name: "counter",
+    name: "home",
     initialState,
     reducers: {
         setTheme: (state, action) => {
