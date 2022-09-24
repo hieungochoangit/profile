@@ -75,7 +75,7 @@
 .hide {
     position: absolute;
     transition: 5s;
-    animation: hide 0.8s forwards;
+    animation: hide 0.5s forwards ease-in-out;
 }
 
 @keyframes hide {
