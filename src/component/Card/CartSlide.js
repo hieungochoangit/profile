@@ -45,6 +45,17 @@ const initialState = {
             url: "https://www.linkedin.com/in/hieungochoang/",
         },
     ],
+    overview: {
+        overviewText: "I have 2 years programming experience in developing websites or web base applications.",
+        languageAndscripting: ["Javascript", "PHP", "HMTL5 CSS3"],
+        framework: ["ReactJS", "Angular", "ExpressJs"],
+        database: ["MySQL", "NoSQL"],
+        other: ["GIT", "Jira", "Notion", "Slack", "Discord", "Vs Code"],
+    },
+    skills: {
+        main: ["HTML CSS Javascript (ReactJs)", "ExpressJs", "RESFul API", "MySQL"],
+        other: ["VueJS", "Angular", "PHP (Laravel Framework)"],
+    },
 };
 
 export const cardSlide = createSlice({

@@ -1,45 +1,83 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useRef } from "react";
 import styles from "./Cart.module.css";
 import clsx from "clsx";
 import moment from "moment/moment";
 import { useSelector } from "react-redux";
+import CardLineText from "./CardLineText/CardLineText";
 
 const Cart = () => {
     const cx = clsx.bind(styles);
 
     const [lastLogin, setLastLogin] = useState("");
+    const [isFullscreen, setIsFullscreen] = useState(false);
+    const cardRef = useRef(null);
 
-    const data = useSelector((state) => state.user.social);
+    const socialNetwork = useSelector((state) => state.user.social);
+    const { overviewText, database, framework, languageAndscripting, other } = useSelector(
+        (state) => state.user.overview
+    );
+    const skills = useSelector((state) => state.user.skills);
 
     useEffect(() => {
         const date = new Date();
         setLastLogin(moment(date).format("lll"));
+
+        console.log(socialNetwork);
     }, []);
 
-    const renderData = () => {
-        return (
-            data &&
-            data.map((item) => {
-                if (item.type === "text") {
-                    return <div key={item.id}>{item.text}</div>;
-                } else {
-                    return (
-                        <div key={item.id}>
-                            <a href={item.url}>{item.text}</a>
-                        </div>
-                    );
-                }
-            })
-        );
+    const renderData = (data, isLink = false) => {
+        if (isLink) {
+            return (
+                data &&
+                data.map((item) => {
+                    if (data.type === "text") {
+                        return <div key={item.id}>{item.text}</div>;
+                    } else {
+                        return (
+                            <div key={item.id}>
+                                <a href={item.url}>{item.text}</a>
+                            </div>
+                        );
+                    }
+                })
+            );
+        } else {
+            return (
+                data &&
+                data.map((item, index) => {
+                    return <div key={index}>{item}</div>;
+                })
+            );
+        }
+    };
+
+    const handleOnClickButtonClose = () => {
+        cardRef.current.remove();
+    };
+
+    const handleOnClickButtonFullscreen = () => {
+        if (isFullscreen) {
+            cardRef.current.style.width = "1000px";
+            cardRef.current.style.height = "500px";
+        } else {
+            cardRef.current.style.width = "100vw";
+            cardRef.current.style.height = "100vh";
+        }
+        setIsFullscreen(!isFullscreen);
+    };
+
+    const handleOnClickButtonHideCard = () => {
+        console.log(1);
     };
 
     return (
-        <div className={cx(styles.card)}>
+        <div ref={cardRef} className={cx(styles.card)}>
             <div className={cx(styles.card_header)}>
                 <div className={cx(styles.card_control)}>
-                    <div className={cx(styles.card_dot, styles.card_close)}>
+                    <div onClick={() => handleOnClickButtonClose()} className={cx(styles.card_dot, styles.card_close)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-x"
@@ -57,7 +95,10 @@ const Cart = () => {
                             <line x1="6" y1="6" x2="18" y2="18"></line>
                         </svg>
                     </div>
-                    <div className={cx(styles.card_dot, styles.card_hide)}>
+                    <div
+                        onClick={() => handleOnClickButtonHideCard()}
+                        className={cx(styles.card_dot, styles.card_hide)}
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-minus"
@@ -74,7 +115,10 @@ const Cart = () => {
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                         </svg>
                     </div>
-                    <div className={cx(styles.card_dot, styles.card_fullscreen)}>
+                    <div
+                        onClick={() => handleOnClickButtonFullscreen()}
+                        className={cx(styles.card_dot, styles.card_fullscreen)}
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-arrows-double-sw-ne"
@@ -96,12 +140,41 @@ const Cart = () => {
                     </div>
                 </div>
 
-                <div className={cx(styles.card_author)}>Hieu@Hieuhn-Macbook-Pro</div>
+                <div className={cx(styles.card_author)}>Hieu@hieungochoang-Macbook-Pro</div>
             </div>
             <div className={cx(styles.card_content)}>
-                <div>Last login: {lastLogin} on banhCuon</div>
-                <div>Hieu-Macbook-Pro:~ Hieu$ echo CONTACT</div>
-                {renderData()}
+                <CardLineText>Last login: {lastLogin} on ttys000</CardLineText>
+
+                <CardLineText>
+                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo CONTACT
+                    {renderData(socialNetwork, true)}
+                </CardLineText>
+
+                <CardLineText>
+                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo OVERVIEW
+                    <div>{overviewText}</div>
+                </CardLineText>
+
+                <CardLineText>
+                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo LANGUAGE &&
+                    SCRIPTING
+                    {renderData(languageAndscripting)}
+                </CardLineText>
+
+                <CardLineText>
+                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo FRAMEWORK
+                    {renderData(framework)}
+                </CardLineText>
+
+                <CardLineText>
+                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo DATABASE
+                    {renderData(database)}
+                </CardLineText>
+
+                <CardLineText>
+                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo OTHER
+                    {renderData(other)}
+                </CardLineText>
             </div>
         </div>
     );

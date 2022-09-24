@@ -5,6 +5,7 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 0px 4px 1px black;
+    transition: 1s;
 }
 
 .card_header {
@@ -13,11 +14,14 @@
     padding: 0 10px;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .card_author {
-    margin-left: 280px;
     font-size: 18px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .card_control {
@@ -60,6 +64,8 @@
 
 .card_content {
     padding: 10px 14px;
+    height: calc(100% - 40px);
+    overflow-y: auto;
 }
 
 .card_content div {
