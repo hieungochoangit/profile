@@ -3,6 +3,7 @@ import clsx from "clsx";
 import Home from "./pages/home/Home";
 import Background from "./component/Background/Background";
 import ControlTheme from "./component/Control/ControlTheme";
+import AudioEffect from "./component/AudioEffect/AudioEffect";
 
 function App() {
     const cx = clsx.bind(styles);
@@ -11,6 +12,7 @@ function App() {
         <div className={cx(styles.app)}>
             <Background />
             <ControlTheme />
+            <AudioEffect />
             <Home />
         </div>
     );
