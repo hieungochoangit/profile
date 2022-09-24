@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
@@ -13,6 +13,7 @@ const Cart = () => {
 
     const [lastLogin, setLastLogin] = useState("");
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isHide, setIsHide] = useState(false);
     const cardRef = useRef(null);
 
     const socialNetwork = useSelector((state) => state.user.social);
@@ -68,123 +69,144 @@ const Cart = () => {
     };
 
     const handleOnClickButtonHideCard = () => {
-        console.log(1);
+        setIsHide(true);
     };
 
     return (
-        <div ref={cardRef} className={cx(styles.card)}>
-            <div className={cx(styles.card_header)}>
-                <div className={cx(styles.card_control)}>
-                    <div onClick={() => handleOnClickButtonClose()} className={cx(styles.card_dot, styles.card_close)}>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-x"
-                            width="14"
-                            height="14"
-                            viewBox="0 0 24 24"
-                            strokeWidth="2"
-                            stroke="currentColor"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
+        <div ref={cardRef} className={cx(styles.card, isHide ? styles.hide : "")}>
+            {!isHide ? (
+                <>
+                    <div className={cx(styles.card_header)}>
+                        <div className={cx(styles.card_control)}>
+                            <div
+                                onClick={() => handleOnClickButtonClose()}
+                                className={cx(styles.card_dot, styles.card_close)}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="icon icon-tabler icon-tabler-x"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="2"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
+                            <div
+                                onClick={() => handleOnClickButtonHideCard()}
+                                className={cx(styles.card_dot, styles.card_hide)}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="icon icon-tabler icon-tabler-minus"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="2"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                            <div
+                                onClick={() => handleOnClickButtonFullscreen()}
+                                className={cx(styles.card_dot, styles.card_fullscreen)}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="icon icon-tabler icon-tabler-arrows-double-sw-ne"
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="2"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M14 3l-11 11"></path>
+                                    <path d="M3 10v4h4"></path>
+                                    <path d="M17 10h4v4"></path>
+                                    <path d="M10 21l11 -11"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div className={cx(styles.card_author)}>Hieu@hieungochoang-Macbook-Pro</div>
                     </div>
-                    <div
-                        onClick={() => handleOnClickButtonHideCard()}
-                        className={cx(styles.card_dot, styles.card_hide)}
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-minus"
-                            width="14"
-                            height="14"
-                            viewBox="0 0 24 24"
-                            strokeWidth="2"
-                            stroke="currentColor"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
+                    <div className={cx(styles.card_content)}>
+                        <CardLineText>Last login: {lastLogin} on ttys000</CardLineText>
+
+                        <CardLineText>
+                            <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo
+                            CONTACT
+                            {renderData(socialNetwork, true)}
+                        </CardLineText>
+
+                        <CardLineText>
+                            <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo
+                            OVERVIEW
+                            <div>{overviewText}</div>
+                        </CardLineText>
+
+                        <CardLineText>
+                            <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo
+                            LANGUAGE && SCRIPTING
+                            {renderData(languageAndscripting)}
+                        </CardLineText>
+
+                        <CardLineText>
+                            <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo
+                            SKILLS
+                            {renderData(main)}
+                        </CardLineText>
+
+                        <CardLineText>
+                            <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo
+                            OTHER SKILLS
+                            {renderData(otherSkills)}
+                        </CardLineText>
+
+                        <CardLineText>
+                            <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo
+                            FRAMEWORK
+                            {renderData(framework)}
+                        </CardLineText>
+
+                        <CardLineText>
+                            <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo
+                            DATABASE
+                            {renderData(database)}
+                        </CardLineText>
+
+                        <CardLineText>
+                            <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo
+                            OTHER
+                            {renderData(other)}
+                        </CardLineText>
                     </div>
-                    <div
-                        onClick={() => handleOnClickButtonFullscreen()}
-                        className={cx(styles.card_dot, styles.card_fullscreen)}
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-arrows-double-sw-ne"
-                            width="14"
-                            height="14"
-                            viewBox="0 0 24 24"
-                            strokeWidth="2"
-                            stroke="currentColor"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M14 3l-11 11"></path>
-                            <path d="M3 10v4h4"></path>
-                            <path d="M17 10h4v4"></path>
-                            <path d="M10 21l11 -11"></path>
-                        </svg>
-                    </div>
+                </>
+            ) : (
+                <div className={cx(styles.icon)} onClick={() => setIsHide(false)}>
+                    <img
+                        className={cx(styles.terminal_image)}
+                        src="https://help.apple.com/assets/6152754A4192845C4361C49A/6152754B4192845C4361C4A1/vi_VN/d94aa1c4979b25e9ffbda97fcbae219a.png"
+                        alt=""
+                    />
                 </div>
-
-                <div className={cx(styles.card_author)}>Hieu@hieungochoang-Macbook-Pro</div>
-            </div>
-            <div className={cx(styles.card_content)}>
-                <CardLineText>Last login: {lastLogin} on ttys000</CardLineText>
-
-                <CardLineText>
-                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo CONTACT
-                    {renderData(socialNetwork, true)}
-                </CardLineText>
-
-                <CardLineText>
-                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo OVERVIEW
-                    <div>{overviewText}</div>
-                </CardLineText>
-
-                <CardLineText>
-                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo LANGUAGE &&
-                    SCRIPTING
-                    {renderData(languageAndscripting)}
-                </CardLineText>
-
-                <CardLineText>
-                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo SKILLS
-                    {renderData(main)}
-                </CardLineText>
-
-                <CardLineText>
-                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo OTHER
-                    SKILLS
-                    {renderData(otherSkills)}
-                </CardLineText>
-
-                <CardLineText>
-                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo FRAMEWORK
-                    {renderData(framework)}
-                </CardLineText>
-
-                <CardLineText>
-                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo DATABASE
-                    {renderData(database)}
-                </CardLineText>
-
-                <CardLineText>
-                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo OTHER
-                    {renderData(other)}
-                </CardLineText>
-            </div>
+            )}
         </div>
     );
 };
