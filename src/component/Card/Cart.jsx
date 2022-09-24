@@ -19,13 +19,11 @@ const Cart = () => {
     const { overviewText, database, framework, languageAndscripting, other } = useSelector(
         (state) => state.user.overview
     );
-    const skills = useSelector((state) => state.user.skills);
+    const { main, otherSkills } = useSelector((state) => state.user.skills);
 
     useEffect(() => {
         const date = new Date();
         setLastLogin(moment(date).format("lll"));
-
-        console.log(socialNetwork);
     }, []);
 
     const renderData = (data, isLink = false) => {
@@ -159,6 +157,17 @@ const Cart = () => {
                     <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo LANGUAGE &&
                     SCRIPTING
                     {renderData(languageAndscripting)}
+                </CardLineText>
+
+                <CardLineText>
+                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo SKILLS
+                    {renderData(main)}
+                </CardLineText>
+
+                <CardLineText>
+                    <span className={cx("primary-color")}>Hieu@hieungochoang-Macbook-Pro:~ Hieu$</span> echo OTHER
+                    SKILLS
+                    {renderData(otherSkills)}
                 </CardLineText>
 
                 <CardLineText>

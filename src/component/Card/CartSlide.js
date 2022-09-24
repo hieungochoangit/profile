@@ -54,7 +54,7 @@ const initialState = {
     },
     skills: {
         main: ["HTML CSS Javascript (ReactJs)", "ExpressJs", "RESFul API", "MySQL"],
-        other: ["VueJS", "Angular", "PHP (Laravel Framework)"],
+        otherSkills: ["VueJS", "Angular", "PHP (Laravel Framework)"],
     },
 };
 
