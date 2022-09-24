@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { THEMES } from "../../common/constant";
 
 const initialState = {
     theme: {
@@ -14,11 +15,14 @@ export const homeSlice = createSlice({
             const theme = action.payload;
 
             switch (theme) {
-                case "dark":
-                    state.theme.name = "dark";
+                case THEMES.DARK:
+                    state.theme.name = THEMES.DARK;
                     break;
-                case "light":
-                    state.theme.name = "light";
+                case THEMES.LIGHT:
+                    state.theme.name = THEMES.LIGHT;
+                    break;
+                case THEMES.RAIN:
+                    state.theme.name = THEMES.RAIN;
                     break;
                 default:
                     state.theme;

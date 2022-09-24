@@ -29,6 +29,12 @@ const Background = () => {
                     type="video/mp4"
                 />
             </video>
+            <video className={cx(styles.background, mode === "rain" ? "" : styles.hide)} autoPlay loop muted>
+                <source
+                    src="https://s3.us-east-2.amazonaws.com/lofi.co/lofi.co/scenes/honolulu/Honolulu+Balcony+Rainy+Day.mp4"
+                    type="video/mp4"
+                />
+            </video>
         </>
     );
 };
