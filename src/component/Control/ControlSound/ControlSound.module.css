@@ -1,0 +1,52 @@
+.control_sound {
+    position: absolute;
+    width: 350px;
+    height: 400px;
+    background-color: black;
+    z-index: 999;
+    bottom: 50px;
+    left: 50px;
+    border-radius: 10px;
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.control_sound_title {
+    margin-bottom: 20px;
+}
+
+.control_sound_item {
+    display: flex;
+    flex-direction: column;
+}
+
+.control_sound_line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 160px;
+    height: 20px;
+    background: linear-gradient(to right, #9a2720 0%, #9a2720 100%);
+    background-size: 150px 10px;
+    background-position: left;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    outline: none;
+    display: block;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #f26b5e;
+    position: relative;
+    z-index: 3;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+}

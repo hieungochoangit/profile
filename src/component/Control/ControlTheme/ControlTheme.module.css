@@ -33,3 +33,7 @@
     box-shadow: 0 0 0 4px #fff, 0 0 0 6px rgb(111, 163, 5);
     background-color: rgb(111, 163, 5);
 }
+
+.vol {
+    cursor: pointer;
+}

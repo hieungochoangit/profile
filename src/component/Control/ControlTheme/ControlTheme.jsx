@@ -2,12 +2,11 @@ import React from "react";
 import styles from "./ControlTheme.module.css";
 import clsx from "clsx";
 
-import { THEMES } from "../../common/constant";
+import { THEMES } from "../../../common/constant";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setTheme } from "../../pages/home/HomeSlice";
+import { setTheme } from "../../../pages/home/HomeSlice";
 import { useState } from "react";
-import { useEffect } from "react";
 
 const ControlTheme = () => {
     const cx = clsx.bind(styles);
